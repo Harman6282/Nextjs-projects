@@ -15,7 +15,6 @@ export default async function Sidebar() {
   const user = await getUserByClerkId(authuser.id);
   if (!user) return null;
 
-  console.log(user);
   return (
     <div className="sticky top-20">
       <Card>
