@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Navbar = async () => {
-  const {getUser} = getKindeServerSession();
+  const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
@@ -37,7 +37,10 @@ const Navbar = async () => {
                 ) : null}
                 <Link
                   href={"/configure/upload"}
-                  className={buttonVariants({ size: "sm" , className:"hidden sm:flex items-center gap-1" })}
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "hidden sm:flex items-center gap-1",
+                  })}
                 >
                   Create case
                   <ArrowRight className="ml-1.5h-5 w-5" />
@@ -49,9 +52,9 @@ const Navbar = async () => {
                   href={"/api/auth/register"}
                   className={buttonVariants({ size: "sm", variant: "ghost" })}
                 >
-                   Sign up
+                  Sign up
                 </Link>
-               
+
                 <Link
                   href={"/api/auth/login"}
                   className={buttonVariants({ size: "sm", variant: "ghost" })}
@@ -62,13 +65,14 @@ const Navbar = async () => {
                 <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
                 <Link
                   href={"/configure/upload"}
-                  className={buttonVariants({ size: "sm" , className:"hidden sm:flex items-center gap-1" })}
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "hidden sm:flex items-center gap-1",
+                  })}
                 >
                   Create case
                   <ArrowRight className="ml-1.5h-5 w-5" />
                 </Link>
-
-
               </>
             )}
           </div>
