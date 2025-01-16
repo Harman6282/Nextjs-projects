@@ -9,11 +9,12 @@ datasource db {
 
 model User {
   id        Int       @id @default(autoincrement())
-  username  String    @unique
-  email     String?   @unique
+  name      String?
+  email     String    @unique
   password  String
   bio       String?
   avatar    String?
+  provider  Provider  @default(Google)
   posts     Post[]
   comments  Comment[]
   likes     Like[]
@@ -53,4 +54,8 @@ model Like {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
+}
+
+enum Provider {
+  Google
 }
