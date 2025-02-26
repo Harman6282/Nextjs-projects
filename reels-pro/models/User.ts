@@ -1,5 +1,4 @@
 import mongoose, { model, models, Schema } from "mongoose";
-
 import bcrypt from "bcryptjs";
 
 export interface IUser {
@@ -11,7 +10,7 @@ export interface IUser {
 }
 
 const userSchema = new Schema<IUser>(
-  {
+  {      
     email: {
       type: String,
       required: true,
