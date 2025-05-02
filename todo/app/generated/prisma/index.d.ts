@@ -999,7 +999,7 @@ export namespace Prisma {
   export type TodoGroupByOutputType = {
     id: string
     title: string
-    completed: boolean
+    completed: boolean | null
     cretedAt: Date
     _count: TodoCountAggregateOutputType | null
     _min: TodoMinAggregateOutputType | null
@@ -1056,7 +1056,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
-      completed: boolean
+      completed: boolean | null
       cretedAt: Date
     }, ExtArgs["result"]["todo"]>
     composites: {}
@@ -1891,6 +1891,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -1954,14 +1962,14 @@ export namespace Prisma {
     NOT?: TodoWhereInput | TodoWhereInput[]
     id?: StringFilter<"Todo"> | string
     title?: StringFilter<"Todo"> | string
-    completed?: BoolFilter<"Todo"> | boolean
+    completed?: BoolNullableFilter<"Todo"> | boolean | null
     cretedAt?: DateTimeFilter<"Todo"> | Date | string
   }
 
   export type TodoOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
-    completed?: SortOrder
+    completed?: SortOrderInput | SortOrder
     cretedAt?: SortOrder
   }
 
@@ -1971,14 +1979,14 @@ export namespace Prisma {
     OR?: TodoWhereInput[]
     NOT?: TodoWhereInput | TodoWhereInput[]
     title?: StringFilter<"Todo"> | string
-    completed?: BoolFilter<"Todo"> | boolean
+    completed?: BoolNullableFilter<"Todo"> | boolean | null
     cretedAt?: DateTimeFilter<"Todo"> | Date | string
   }, "id">
 
   export type TodoOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
-    completed?: SortOrder
+    completed?: SortOrderInput | SortOrder
     cretedAt?: SortOrder
     _count?: TodoCountOrderByAggregateInput
     _max?: TodoMaxOrderByAggregateInput
@@ -1991,56 +1999,56 @@ export namespace Prisma {
     NOT?: TodoScalarWhereWithAggregatesInput | TodoScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Todo"> | string
     title?: StringWithAggregatesFilter<"Todo"> | string
-    completed?: BoolWithAggregatesFilter<"Todo"> | boolean
+    completed?: BoolNullableWithAggregatesFilter<"Todo"> | boolean | null
     cretedAt?: DateTimeWithAggregatesFilter<"Todo"> | Date | string
   }
 
   export type TodoCreateInput = {
     id?: string
     title: string
-    completed?: boolean
+    completed?: boolean | null
     cretedAt?: Date | string
   }
 
   export type TodoUncheckedCreateInput = {
     id?: string
     title: string
-    completed?: boolean
+    completed?: boolean | null
     cretedAt?: Date | string
   }
 
   export type TodoUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     cretedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TodoUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     cretedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TodoCreateManyInput = {
     id?: string
     title: string
-    completed?: boolean
+    completed?: boolean | null
     cretedAt?: Date | string
   }
 
   export type TodoUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     cretedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TodoUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     cretedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -2059,9 +2067,9 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -2073,6 +2081,11 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type TodoCountOrderByAggregateInput = {
@@ -2114,12 +2127,12 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -2140,8 +2153,8 @@ export namespace Prisma {
     set?: string
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -2162,9 +2175,9 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2206,12 +2219,23 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {

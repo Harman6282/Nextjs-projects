@@ -23,3 +23,14 @@ export const POST = async (req: NextRequest) => {
     message: "Todo added successfully",
   });
 };
+
+
+export const GET = async () => {
+  const todos = await prisma.todo.findMany();
+  return NextResponse.json({
+    success: true,
+    message: "Todos fetched successfully",
+    todos,
+  });
+};
+
