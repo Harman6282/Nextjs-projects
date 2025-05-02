@@ -5,9 +5,9 @@ export const PUT = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const { title, completed } = await req.json();
+  const { title } = await req.json();
   const { id } = await params;
-  
+
   if (!id) {
     return NextResponse.json({
       success: false,
@@ -27,7 +27,6 @@ export const PUT = async (
     },
     data: {
       title,
-      completed,
     },
   });
 
@@ -88,5 +87,40 @@ export const DELETE = async (
     deleted,
     success: true,
     message: "Todo deleted successfully",
+  });
+};
+
+export const PATCH = async (
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) => {
+  const {id} = await params;
+
+  const todo = await prisma.todo.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  if (!todo) {
+    return NextResponse.json({
+      success: false,
+      message: "Todo not found",
+    });
+  }
+
+  await prisma.todo.update({
+    where: {
+      id,
+    },
+    data: {
+      completed: !todo.completed,
+    },
+  });
+
+  return NextResponse.json({
+    todo,
+    success: true,
+    message: "Todo toggled successfully",
   });
 };

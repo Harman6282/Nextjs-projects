@@ -26,7 +26,11 @@ export const POST = async (req: NextRequest) => {
 
 
 export const GET = async () => {
-  const todos = await prisma.todo.findMany();
+  const todos = await prisma.todo.findMany({
+    orderBy:{
+      cretedAt: "desc"
+    }
+  });
   return NextResponse.json({
     success: true,
     message: "Todos fetched successfully",
