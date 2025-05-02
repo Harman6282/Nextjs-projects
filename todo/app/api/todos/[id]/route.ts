@@ -7,7 +7,7 @@ export const PUT = async (
 ) => {
   const { title, completed } = await req.json();
   const { id } = await params;
-
+  
   if (!id) {
     return NextResponse.json({
       success: false,
