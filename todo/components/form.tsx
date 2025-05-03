@@ -15,7 +15,6 @@ const Form = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [title, setTitle] = useState("");
 
-
   const addTodo = async () => {
     const res = await axios.post("http://localhost:3000/api/todos", {
       title,
@@ -23,7 +22,6 @@ const Form = () => {
     setTodos([ res.data.todo, ...todos]);
     setTitle("");
   };
-
 
   return (
     <div>

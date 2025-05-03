@@ -79,7 +79,7 @@ const Listing = ({
     <div className="mt-4 bg-[#F1ECE6] p-3 rounded">
       {todos.map((todo: TodoType) => (
         <Todo
-          key={todo.id ?? todo.title + Math.random()}
+          key={todo.id ?? todo.title}
           todo={todo}
           onToggle={onToggle}
           onDelete={onDelete}
