@@ -27,15 +27,15 @@ const Form = () => {
 
   return (
     <div>
-      <div className=" bg-gray-800 w-auto h-auto rounded p-3">
-        <div className="flex items-center">
+      <div className=" w-[500px] h-auto rounded p-3">
+        <div className="flex bg-[#F1ECE6] p-3 rounded-md items-center">
           <input
             type="text"
-            className="border   border-r-0 rounded-l-2xl  px-3 py-1 focus:outline-none"
+            className="border w-full   border-r-0 rounded-l-md  px-3 py-1 focus:outline-none"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <button className="bg-blue-500 text-white px-2 h-[33px] py-1 rounded-r" onClick={addTodo}>
+          <button className="bg-black text-white px-3 h-[33px] py-1 rounded-r-md " onClick={addTodo}>
             Add
           </button>
         </div>

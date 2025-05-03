@@ -51,12 +51,11 @@ const Listing = ({
     const res = await axios.get("http://localhost:3000/api/todos");
 
     setTodos(res.data.todos);
-    console.log(res.data.todos);
     return res.data;
   };
 
   const onToggle = async (id: string) => {
-    console.log(id);
+
     await axios.patch(`http://localhost:3000/api/todos/${id}`);
 
     setTodos((prev) =>
@@ -68,7 +67,6 @@ const Listing = ({
 
   const onDelete = async (id: string) => {
     await axios.delete(`http://localhost:3000/api/todos/${id}`);
-
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
@@ -78,7 +76,7 @@ const Listing = ({
 
   
   return (
-    <div className="mt-3">
+    <div className="mt-4 bg-[#F1ECE6] p-3 rounded">
       {todos.map((todo: TodoType) => (
         <Todo
           key={todo.id ?? todo.title + Math.random()}
