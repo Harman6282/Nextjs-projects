@@ -38,8 +38,23 @@ const Register = () => {
       });
   };
 
+/*************  ✨ Windsurf Command ⭐  *************/
+  /**
+   * Sign in with GitHub
+   * @description
+   * Redirects user to GitHub to sign in with their GitHub credentials.
+   * After successful authentication, the user is redirected to the homepage.
+   */
+/*******  f6f6c8f2-570c-4681-9e41-e7bfae3c7d30  *******/
   const githubSignIn = async () => {
     signIn("github",{
+      callbackUrl: "/",
+      redirect: true
+    })
+  }
+
+  const googleSignin = async () => {
+    signIn("google",{
       callbackUrl: "/",
       redirect: true
     })
@@ -205,6 +220,23 @@ const Register = () => {
                   </svg>
                 </span>
                 Sign up with Github
+              </button>
+              <button
+                type="button"
+                className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                onClick={() => googleSignin()}
+              >
+                <span className="mr-2 inline-block"> 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 23 23"
+                    width="40px"
+                    height="40px"
+                  >
+                    <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z"/>
+                  </svg>
+                </span>
+                Sign in with Google
               </button>
             </div>
           </div>
