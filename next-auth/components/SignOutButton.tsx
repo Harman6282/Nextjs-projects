@@ -6,7 +6,7 @@ const SignOutButton = () => {
   return (
     <div>
       <button
-        className="bg-orange-400 rounded-md p-2"
+        className="bg-orange-400 rounded-md p-2 cursor-pointer"
         onClick={() => signOut({ callbackUrl: "/login", redirect: true })}
       >
         Sign out

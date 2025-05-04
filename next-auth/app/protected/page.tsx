@@ -9,7 +9,7 @@ const page = async () => {
   }
   return <div>Protected route
     <br />
-    <p>{session?.user?.name}</p> <br />
+    <p>{session?.user?.name}</p> 
     <p>{session?.user?.email}</p>
   </div>;
 };
