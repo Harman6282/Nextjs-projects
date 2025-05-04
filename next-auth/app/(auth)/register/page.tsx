@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Register = () => {
   const [authState, setAuthState] = useState({
@@ -36,6 +37,13 @@ const Register = () => {
         console.log(err);
       });
   };
+
+  const githubSignIn = async () => {
+    signIn("github",{
+      callbackUrl: "/",
+      redirect: true
+    })
+  }
 
   return (
     <section>
@@ -184,6 +192,7 @@ const Register = () => {
               <button
                 type="button"
                 className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                onClick={githubSignIn}
               >
                 <span className="mr-2 inline-block">
                   <svg
