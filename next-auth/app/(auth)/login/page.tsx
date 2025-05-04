@@ -1,17 +1,45 @@
-"use client"
+"use client";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import axios from "axios";
+import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
+  const params = useSearchParams();
 
-    const [authState, setAuthState] = useState({
-        email: "",
-        password: "",
+  const [authState, setAuthState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<loginErrorType>({});
+
+  const submitForm = async () => {
+    setLoading(true);
+    axios
+      .post("/api/auth/login", authState)
+      .then((res) => {
+        setLoading(false);
+        const response = res.data;
+
+        if (response.status === 200) {
+          signIn("credentials", {
+            email: authState.email,
+            password: authState.password,
+            redirect: true,
+            callbackUrl: "/",
+          });
+        } else if (response?.status === 400) {
+          setErrors(response?.errors);
+          console.log(response?.errors);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    
-      const submitForm = () => {
-        console.log(authState);
-      }
+  };
 
   return (
     <section>
@@ -52,6 +80,11 @@ const LoginPage = () => {
                 Sign Up
               </Link>
             </p>
+            {params.get("message") && (
+              <p className="bg-green-300  p-4 rounded-md">
+                {params.get("message")}
+              </p>
+            )}
             <form action="#" method="POST" className="mt-8">
               <div className="space-y-5">
                 <div>
@@ -66,12 +99,12 @@ const LoginPage = () => {
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="email"
                       placeholder="Email"
-                        onChange={(e) =>
-                          setAuthState({ ...authState, email: e.target.value })
-                        }
+                      onChange={(e) =>
+                        setAuthState({ ...authState, email: e.target.value })
+                      }
                     ></input>
                     <span className="text-red-500 font-bold">
-                      {/* {errors?.email} */}
+                      {errors?.email}
                     </span>
                   </div>
                 </div>
@@ -89,15 +122,14 @@ const LoginPage = () => {
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="password"
                       placeholder="Password"
-                        onChange={(e) =>
-                          setAuthState({ ...authState, password: e.target.value })
-                        }
+                      onChange={(e) =>
+                        setAuthState({ ...authState, password: e.target.value })
+                      }
                     ></input>
                     <span className="text-red-500 font-bold">
-                      {/* {errors?.password} */}
+                      {errors?.password}
                     </span>
                   </div>
-                  
                 </div>
                 <div>
                   <button
@@ -105,7 +137,7 @@ const LoginPage = () => {
                     className={`inline-flex w-full items-center justify-center rounded-md  px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80 bg-black`}
                     onClick={submitForm}
                   >
-                    {/* {loading ? "Processing.." : "Login"} */} Login
+                    {loading ? "Processing.." : "Login"}
                   </button>
                 </div>
               </div>
@@ -129,7 +161,6 @@ const LoginPage = () => {
                 Sign in with Github
               </button>
             </div>
-
           </div>
         </div>
       </div>
